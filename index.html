@@ -12,27 +12,32 @@
 <body>
     <div id="main-container">
         <div id="calculating-area">
-            <p><h3><b>CALCULATOR</b></h3></p>
-            <p><input type="text" id="number1" size="60" placeholder="Please enter a number"></p>
+            <form id="inputs" align="center" style="float: left;">
+            <p><h3><b><div style="font-size: 40px;font-weight: 900;background-color: white;border-radius: 15px;">CALCULATOR</div></b></h3></p>
+            <p><input type="text" class="textBox"  id="number1" size="60" placeholder="Please enter a number"></p>
 
-           <p> <input type="text" id="number2" size="60" placeholder="Please enter a number"> </p> <br>
+           <p> <input type="text" class="textBox" id="number2" size="60" placeholder="Please enter a number"> </p> <br>
             
+           <div style="background-color:white;">
             <input type="radio" name="1" value="1">
-            <label for="html">SUM</label>
+            <label for="html" style="color:blue;font-weight:900;font-size: 20px;">SUM</label>
 
             <input type="radio" name="1" value="2">
-            <label for="html">SUBTRACT</label>
+            <label for="html" style="color:red;font-weight:900;font-size: 20px;">SUBTRACT</label>
             
             <input type="radio" name="1" value="3">
-            <label for="html">DIVIDE</label>
+            <label for="html" style="color:magenta;font-weight:900;font-size: 20px;">DIVIDE</label>
 
             <input type="radio" name="1" value="4">
-            <label for="html">MULTIPLY</label>
+            <label for="html" style="color:greenyellow;font-weight:900;font-size: 20px;">MULTIPLY</label>
 
-           <p> <input type="button" id="calculate" value="CALCULATE"></p>
+        </div>
+
+           <p> <input type="button" class="btn" id="btn" value="CALCULATE"></p>
 
            <label id="result" for="html"><H2>RESULT:</H2></label>
-
+            
+        </form>
         </div>
     </div>
 </body>
