@@ -26,13 +26,15 @@
         });
 
         // on DOM ready...
-        $(function () {
-            // the following event handler will handle click events for BUTTON
-            $("#BTNSERVICE").on('click', function (event) {
-                var intA = $('#intA').val();
-                var intB = $('#intB').val();
+        //Toplama İşlemi
+        function addOp() {
+            $(function () {
+                // the following event handler will handle click events for BUTTON
+                $("#BTNSERVICE").on('click', function (event) {
+                    var intA = $('#intA').val();
+                    var intB = $('#intB').val();
 
-                var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                    var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
                 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
                         <soap:Body>
                             <Add xmlns="http://tempuri.org/">
@@ -42,33 +44,173 @@
                         </soap:Body>
                 </soap:Envelope>`;
 
-                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
-                var self = this;
-                self.disabled = true;
-                $.ajax({
-                    type: "POST",
-                    url: webserUrl,
-                    dataType: "xml",
-                    processData: false,
-                    contentType: "text/xml; charset=\"utf-8\"",
-                    data: soapRequest,
-                    success: function (data, status, req) {
-                        if (status == "success") {
-                            var result = $(req.responseXML).find('AddResult').text();
-                            $('#AddResult').text("RESULT: " +result);
-                            document.getElementById("AddResult").style.fontWeight="Bolder";
-                            document.getElementById("AddResult").style.fontSize="40px";
+                    var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                    var self = this;
+                    self.disabled = true;
+                    $.ajax({
+                        type: "POST",
+                        url: webserUrl,
+                        dataType: "xml",
+                        processData: false,
+                        contentType: "text/xml; charset=\"utf-8\"",
+                        data: soapRequest,
+                        success: function (data, status, req) {
+                            if (status == "success") {
+                                var result = $(req.responseXML).find('AddResult').text();
+                                $('#AddResult').text("RESULT: " + result);
+                                document.getElementById("AddResult").style.fontWeight = "Bolder";
+                                document.getElementById("AddResult").style.fontSize = "40px";
+                            }
+                        },
+                        error: function (data, status, req) {
+                            $('#errmsg').text(data.responseText);
+                        },
+                        complete: function (data, status) {
+                            self.disabled = false;
                         }
-                    },
-                    error: function (data, status, req) {
-                        $('#errmsg').text(data.responseText);
-                    },
-                    complete: function (data, status) {
-                        self.disabled = false;
-                    }
+                    });
                 });
             });
-        });
+
+            //Çıkartma İşlemi
+            function subsOp() {
+                $(function () {
+                    // the following event handler will handle click events for BUTTON
+                    $("#BTNSERVICE1").on('click', function (event) {
+                        var intA = $('#intA').val();
+                        var intB = $('#intB').val();
+
+                        var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                        <soap:Body>
+                            <Add xmlns="http://tempuri.org/">
+                                <intA>${intA}</intA>
+                                <intB>${intB}</intB>
+                            </Add>
+                        </soap:Body>
+                </soap:Envelope>`;
+
+                        var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                        var self = this;
+                        self.disabled = true;
+                        $.ajax({
+                            type: "POST",
+                            url: webserUrl,
+                            dataType: "xml",
+                            processData: false,
+                            contentType: "text/xml; charset=\"utf-8\"",
+                            data: soapRequest,
+                            success: function (data, status, req) {
+                                if (status == "success") {
+                                    var result = $(req.responseXML).find('AddResult').text();
+                                    $('#AddResult').text("RESULT: " + result);
+                                    document.getElementById("AddResult").style.fontWeight = "Bolder";
+                                    document.getElementById("AddResult").style.fontSize = "40px";
+                                }
+                            },
+                            error: function (data, status, req) {
+                                $('#errmsg').text(data.responseText);
+                            },
+                            complete: function (data, status) {
+                                self.disabled = false;
+                            }
+                        });
+                    });
+                });
+
+                //BÖLME İŞLEMİ        
+                function divOp() {
+                    $(function () {
+                        // the following event handler will handle click events for BUTTON
+                        $("#BTNSERVICE2").on('click', function (event) {
+                            var intA = $('#intA').val();
+                            var intB = $('#intB').val();
+
+                            var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                        <soap:Body>
+                            <Add xmlns="http://tempuri.org/">
+                                <intA>${intA}</intA>
+                                <intB>${intB}</intB>
+                            </Add>
+                        </soap:Body>
+                </soap:Envelope>`;
+
+                            var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                            var self = this;
+                            self.disabled = true;
+                            $.ajax({
+                                type: "POST",
+                                url: webserUrl,
+                                dataType: "xml",
+                                processData: false,
+                                contentType: "text/xml; charset=\"utf-8\"",
+                                data: soapRequest,
+                                success: function (data, status, req) {
+                                    if (status == "success") {
+                                        var result = $(req.responseXML).find('AddResult').text();
+                                        $('#AddResult').text("RESULT: " + result);
+                                        document.getElementById("AddResult").style.fontWeight = "Bolder";
+                                        document.getElementById("AddResult").style.fontSize = "40px";
+                                    }
+                                },
+                                error: function (data, status, req) {
+                                    $('#errmsg').text(data.responseText);
+                                },
+                                complete: function (data, status) {
+                                    self.disabled = false;
+                                }
+                            });
+                        });
+                    });
+
+                    //ÇARPMA İŞLEMİ
+                    function mulOp() {
+                        $(function () {
+                            // the following event handler will handle click events for BUTTON
+                            $("#BTNSERVICE3").on('click', function (event) {
+                                var intA = $('#intA').val();
+                                var intB = $('#intB').val();
+
+                                var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                        <soap:Body>
+                            <Add xmlns="http://tempuri.org/">
+                                <intA>${intA}</intA>
+                                <intB>${intB}</intB>
+                            </Add>
+                        </soap:Body>
+                </soap:Envelope>`;
+
+                                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                                var self = this;
+                                self.disabled = true;
+                                $.ajax({
+                                    type: "POST",
+                                    url: webserUrl,
+                                    dataType: "xml",
+                                    processData: false,
+                                    contentType: "text/xml; charset=\"utf-8\"",
+                                    data: soapRequest,
+                                    success: function (data, status, req) {
+                                        if (status == "success") {
+                                            var result = $(req.responseXML).find('AddResult').text();
+                                            $('#AddResult').text("RESULT: " + result);
+                                            document.getElementById("AddResult").style.fontWeight = "Bolder";
+                                            document.getElementById("AddResult").style.fontSize = "40px";
+                                        }
+                                    },
+                                    error: function (data, status, req) {
+                                        $('#errmsg').text(data.responseText);
+                                    },
+                                    complete: function (data, status) {
+                                        self.disabled = false;
+                                    }
+                                });
+                            });
+                        });
+                    }
+
     </script>
 
 </head>
@@ -77,34 +219,45 @@
     <div id="main-container">
         <div id="calculating-area">
             <form id="inputs" align="center" style="float: left;">
-            <p><h3><b><div style="width:340px;margin-left:50px;font-size: 40px;font-weight: 900;background-color: white;border-radius: 15px;">CALCULATOR</div></b></h3></p>
-            <p><input type="text" class="textBox"  id="intA" size="60" placeholder="Please enter a number"></p>
+                <p>
+                <h3><b>
+                        <div
+                            style="width:340px;margin-left:50px;font-size: 40px;font-weight: 900;background-color: white;border-radius: 15px;">
+                            CALCULATOR</div>
+                    </b></h3>
+                </p>
+                <p><input type="text" class="textBox" id="intA" size="60" placeholder="Please enter a number"></p>
 
-           <p> <input type="text" class="textBox" id="intB" size="60" placeholder="Please enter a number"> </p> <br>
-            
-           <div style="background-color:white;">
-            <input type="radio" name="1" value="1">
-            <label for="html" style="color:blue;font-weight:900;font-size: 20px;">SUM</label>
+                <p> <input type="text" class="textBox" id="intB" size="60" placeholder="Please enter a number"> </p>
+                <br>
 
-            <input type="radio" name="1" value="2">
-            <label for="html" style="color:red;font-weight:900;font-size: 20px;">SUBTRACT</label>
-            
-            <input type="radio" name="1" value="3">
-            <label for="html" style="color:magenta;font-weight:900;font-size: 20px;">DIVIDE</label>
+                <div style="background-color:white;">
+                    <button type="button" id="BTNSERVICE" class="btn" name="1" onclick="addOp()" value="1"> <label
+                            for="html" style="color:blue;font-weight:900;font-size: 20px;">+</label></button>
 
-            <input type="radio" name="1" value="4">
-            <label for="html" style="color:greenyellow;font-weight:900;font-size: 20px;">MULTIPLY</label>
+                    <button type="button" id="BTNSERVICE1" class="btn" name="1" onclick="subsOp()"><label for="html"
+                            style="color:red;font-weight:900;font-size: 20px;">-</label></button>
 
-        </div>
 
-           <p> <input type="button" class="btn" id="BTNSERVICE" value="CALCULATE"></p>
+                    <button type="button" id="BTNSERVICE2" class="btn" name="1" onclick="divOp()"><label for="html"
+                            style="color:magenta;font-weight:900;font-size: 20px;">/</label></button>
 
-           <label id="AddResult" style="font-size: 40px;font-weight: bolder;"  >RESULT:</label>
-           
-          
-            
-        </form>
-        <div id="errmsg"></div>
+                    <button type="button" id="BTNSERVICE3" class="btn" name="1" onclick="mulOp()"><label for="html"
+                            style="color:rgba(0, 160, 48, 0.808);font-weight:900;font-size: 20px;">X</label></button>
+
+
+
+                </div>
+                <br>
+
+
+                <label id="AddResult"
+                    style="font-size: 40px;font-weight: bolder;background-color: orange;">RESULT:</label>
+
+
+
+            </form>
+            <div id="errmsg"></div>
         </div>
     </div>
 </body>
