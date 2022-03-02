@@ -29,12 +29,12 @@
         //Toplama İşlemi
         function addOp() {
             $(function () {
-                // the following event handler will handle click events for BUTTON
-                $("#BTNSERVICE").on('click', function (event) {
-                    var intA = $('#intA').val();
-                    var intB = $('#intB').val();
+            // the following event handler will handle click events for BUTTON
+            $("#BTNSERVICE").on('click', function (event) {
+                var intA = $('#intA').val();
+                var intB = $('#intB').val();
 
-                    var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
                 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
                         <soap:Body>
                             <Add xmlns="http://tempuri.org/">
@@ -44,173 +44,173 @@
                         </soap:Body>
                 </soap:Envelope>`;
 
-                    var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
-                    var self = this;
-                    self.disabled = true;
-                    $.ajax({
-                        type: "POST",
-                        url: webserUrl,
-                        dataType: "xml",
-                        processData: false,
-                        contentType: "text/xml; charset=\"utf-8\"",
-                        data: soapRequest,
-                        success: function (data, status, req) {
-                            if (status == "success") {
-                                var result = $(req.responseXML).find('AddResult').text();
-                                $('#AddResult').text("RESULT: " + result);
-                                document.getElementById("AddResult").style.fontWeight = "Bolder";
-                                document.getElementById("AddResult").style.fontSize = "40px";
-                            }
-                        },
-                        error: function (data, status, req) {
-                            $('#errmsg').text(data.responseText);
-                        },
-                        complete: function (data, status) {
-                            self.disabled = false;
+                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                var self = this;
+                self.disabled = true;
+                $.ajax({
+                    type: "POST",
+                    url: webserUrl,
+                    dataType: "xml",
+                    processData: false,
+                    contentType: "text/xml; charset=\"utf-8\"",
+                    data: soapRequest,
+                    success: function (data, status, req) {
+                        if (status == "success") {
+                            var result = $(req.responseXML).find('AddResult').text();
+                            $('#AddResult').text("RESULT: " +result);
+                            document.getElementById("AddResult").style.fontWeight="Bolder";
+                            document.getElementById("AddResult").style.fontSize="40px";
                         }
-                    });
+                    },
+                    error: function (data, status, req) {
+                        $('#errmsg').text(data.responseText);
+                    },
+                    complete: function (data, status) {
+                        self.disabled = false;
+                    }
                 });
             });
-
+        });
+        }
             //Çıkartma İşlemi
             function subsOp() {
-                $(function () {
-                    // the following event handler will handle click events for BUTTON
-                    $("#BTNSERVICE1").on('click', function (event) {
-                        var intA = $('#intA').val();
-                        var intB = $('#intB').val();
+            $(function () {
+            // the following event handler will handle click events for BUTTON
+            $("#BTNSERVICE1").on('click', function (event) {
+                var intA = $('#intA').val();
+                var intB = $('#intB').val();
 
-                        var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
                 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
                         <soap:Body>
-                            <Add xmlns="http://tempuri.org/">
+                            <Subtract xmlns="http://tempuri.org/">
                                 <intA>${intA}</intA>
                                 <intB>${intB}</intB>
-                            </Add>
+                            </Subtract>
                         </soap:Body>
                 </soap:Envelope>`;
 
-                        var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
-                        var self = this;
-                        self.disabled = true;
-                        $.ajax({
-                            type: "POST",
-                            url: webserUrl,
-                            dataType: "xml",
-                            processData: false,
-                            contentType: "text/xml; charset=\"utf-8\"",
-                            data: soapRequest,
-                            success: function (data, status, req) {
-                                if (status == "success") {
-                                    var result = $(req.responseXML).find('AddResult').text();
-                                    $('#AddResult').text("RESULT: " + result);
-                                    document.getElementById("AddResult").style.fontWeight = "Bolder";
-                                    document.getElementById("AddResult").style.fontSize = "40px";
-                                }
-                            },
-                            error: function (data, status, req) {
-                                $('#errmsg').text(data.responseText);
-                            },
-                            complete: function (data, status) {
-                                self.disabled = false;
-                            }
-                        });
-                    });
+                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                var self = this;
+                self.disabled = true;
+                $.ajax({
+                    type: "POST",
+                    url: webserUrl,
+                    dataType: "xml",
+                    processData: false,
+                    contentType: "text/xml; charset=\"utf-8\"",
+                    data: soapRequest,
+                    success: function (data, status, req) {
+                        if (status == "success") {
+                            var result = $(req.responseXML).find('SubtractResult').text();
+                            $('#AddResult').text("RESULT: " +result);
+                            document.getElementById("AddResult").style.fontWeight="Bolder";
+                            document.getElementById("AddResult").style.fontSize="40px";
+                        }
+                    },
+                    error: function (data, status, req) {
+                        $('#errmsg').text(data.responseText);
+                    },
+                    complete: function (data, status) {
+                        self.disabled = false;
+                    }
                 });
-
+            });
+        });
+        }
                 //BÖLME İŞLEMİ        
                 function divOp() {
-                    $(function () {
-                        // the following event handler will handle click events for BUTTON
-                        $("#BTNSERVICE2").on('click', function (event) {
-                            var intA = $('#intA').val();
-                            var intB = $('#intB').val();
+            $(function () {
+            // the following event handler will handle click events for BUTTON
+            $("#BTNSERVICE2").on('click', function (event) {
+                var intA = $('#intA').val();
+                var intB = $('#intB').val();
 
-                            var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
                 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
                         <soap:Body>
-                            <Add xmlns="http://tempuri.org/">
+                            <Divide xmlns="http://tempuri.org/">
                                 <intA>${intA}</intA>
                                 <intB>${intB}</intB>
-                            </Add>
+                            </Divide>
                         </soap:Body>
                 </soap:Envelope>`;
 
-                            var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
-                            var self = this;
-                            self.disabled = true;
-                            $.ajax({
-                                type: "POST",
-                                url: webserUrl,
-                                dataType: "xml",
-                                processData: false,
-                                contentType: "text/xml; charset=\"utf-8\"",
-                                data: soapRequest,
-                                success: function (data, status, req) {
-                                    if (status == "success") {
-                                        var result = $(req.responseXML).find('AddResult').text();
-                                        $('#AddResult').text("RESULT: " + result);
-                                        document.getElementById("AddResult").style.fontWeight = "Bolder";
-                                        document.getElementById("AddResult").style.fontSize = "40px";
-                                    }
-                                },
-                                error: function (data, status, req) {
-                                    $('#errmsg').text(data.responseText);
-                                },
-                                complete: function (data, status) {
-                                    self.disabled = false;
-                                }
-                            });
-                        });
-                    });
+                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                var self = this;
+                self.disabled = true;
+                $.ajax({
+                    type: "POST",
+                    url: webserUrl,
+                    dataType: "xml",
+                    processData: false,
+                    contentType: "text/xml; charset=\"utf-8\"",
+                    data: soapRequest,
+                    success: function (data, status, req) {
+                        if (status == "success") {
+                            var result = $(req.responseXML).find('DivideResult').text();
+                            $('#AddResult').text("RESULT: " +result);
+                            document.getElementById("AddResult").style.fontWeight="Bolder";
+                            document.getElementById("AddResult").style.fontSize="40px";
+                        }
+                    },
+                    error: function (data, status, req) {
+                        $('#errmsg').text(data.responseText);
+                    },
+                    complete: function (data, status) {
+                        self.disabled = false;
+                    }
+                });
+            });
+        });
+        }
 
                     //ÇARPMA İŞLEMİ
                     function mulOp() {
-                        $(function () {
-                            // the following event handler will handle click events for BUTTON
-                            $("#BTNSERVICE3").on('click', function (event) {
-                                var intA = $('#intA').val();
-                                var intB = $('#intB').val();
+            $(function () {
+            // the following event handler will handle click events for BUTTON
+            $("#BTNSERVICE3").on('click', function (event) {
+                var intA = $('#intA').val();
+                var intB = $('#intB').val();
 
-                                var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
                 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
                         <soap:Body>
-                            <Add xmlns="http://tempuri.org/">
+                            <Multiply xmlns="http://tempuri.org/">
                                 <intA>${intA}</intA>
                                 <intB>${intB}</intB>
-                            </Add>
+                            </Multiply>
                         </soap:Body>
                 </soap:Envelope>`;
 
-                                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
-                                var self = this;
-                                self.disabled = true;
-                                $.ajax({
-                                    type: "POST",
-                                    url: webserUrl,
-                                    dataType: "xml",
-                                    processData: false,
-                                    contentType: "text/xml; charset=\"utf-8\"",
-                                    data: soapRequest,
-                                    success: function (data, status, req) {
-                                        if (status == "success") {
-                                            var result = $(req.responseXML).find('AddResult').text();
-                                            $('#AddResult').text("RESULT: " + result);
-                                            document.getElementById("AddResult").style.fontWeight = "Bolder";
-                                            document.getElementById("AddResult").style.fontSize = "40px";
-                                        }
-                                    },
-                                    error: function (data, status, req) {
-                                        $('#errmsg').text(data.responseText);
-                                    },
-                                    complete: function (data, status) {
-                                        self.disabled = false;
-                                    }
-                                });
-                            });
-                        });
+                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                var self = this;
+                self.disabled = true;
+                $.ajax({
+                    type: "POST",
+                    url: webserUrl,
+                    dataType: "xml",
+                    processData: false,
+                    contentType: "text/xml; charset=\"utf-8\"",
+                    data: soapRequest,
+                    success: function (data, status, req) {
+                        if (status == "success") {
+                            var result = $(req.responseXML).find('MultiplyResult').text();
+                            $('#AddResult').text("RESULT: " +result);
+                            document.getElementById("AddResult").style.fontWeight="Bolder";
+                            document.getElementById("AddResult").style.fontSize="40px";
+                        }
+                    },
+                    error: function (data, status, req) {
+                        $('#errmsg').text(data.responseText);
+                    },
+                    complete: function (data, status) {
+                        self.disabled = false;
                     }
-
+                });
+            });
+        });
+        }
     </script>
 
 </head>
