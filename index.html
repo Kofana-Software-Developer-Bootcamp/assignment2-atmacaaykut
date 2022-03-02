@@ -4,19 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <script src="calculate.js"></script>
+
     <title>
         CALCULATOR
     </title>
+
+    <!-- in the header section you can add javascript -->
+
+    <!-- include the jQuery library version 3.3.1 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- include javascript code -->
+    <script>
+        // the following in order to handle cors in this demo....
+        // for details see: https://github.com/Rob--W/cors-anywhere/#documentation
+        jQuery.ajaxPrefilter(function (options) {
+            if (options.crossDomain && jQuery.support.cors) {
+                options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+            }
+        });
+
+        // on DOM ready...
+        $(function () {
+            // the following event handler will handle click events for BUTTON
+            $("#BTNSERVICE").on('click', function (event) {
+                var intA = $('#intA').val();
+                var intB = $('#intB').val();
+
+                var soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+                <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                        <soap:Body>
+                            <Add xmlns="http://tempuri.org/">
+                                <intA>${intA}</intA>
+                                <intB>${intB}</intB>
+                            </Add>
+                        </soap:Body>
+                </soap:Envelope>`;
+
+                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                var self = this;
+                self.disabled = true;
+                $.ajax({
+                    type: "POST",
+                    url: webserUrl,
+                    dataType: "xml",
+                    processData: false,
+                    contentType: "text/xml; charset=\"utf-8\"",
+                    data: soapRequest,
+                    success: function (data, status, req) {
+                        if (status == "success") {
+                            var result = $(req.responseXML).find('AddResult').text();
+                            $('#AddResult').text("RESULT: " +result);
+                            document.getElementById("AddResult").style.fontWeight="Bolder";
+                            document.getElementById("AddResult").style.fontSize="40px";
+                        }
+                    },
+                    error: function (data, status, req) {
+                        $('#errmsg').text(data.responseText);
+                    },
+                    complete: function (data, status) {
+                        self.disabled = false;
+                    }
+                });
+            });
+        });
+    </script>
+
 </head>
 
 <body>
     <div id="main-container">
         <div id="calculating-area">
             <form id="inputs" align="center" style="float: left;">
-            <p><h3><b><div style="font-size: 40px;font-weight: 900;background-color: white;border-radius: 15px;">CALCULATOR</div></b></h3></p>
-            <p><input type="text" class="textBox"  id="number1" size="60" placeholder="Please enter a number"></p>
+            <p><h3><b><div style="width:340px;margin-left:50px;font-size: 40px;font-weight: 900;background-color: white;border-radius: 15px;">CALCULATOR</div></b></h3></p>
+            <p><input type="text" class="textBox"  id="intA" size="60" placeholder="Please enter a number"></p>
 
-           <p> <input type="text" class="textBox" id="number2" size="60" placeholder="Please enter a number"> </p> <br>
+           <p> <input type="text" class="textBox" id="intB" size="60" placeholder="Please enter a number"> </p> <br>
             
            <div style="background-color:white;">
             <input type="radio" name="1" value="1">
@@ -33,11 +97,14 @@
 
         </div>
 
-           <p> <input type="button" class="btn" id="btn" value="CALCULATE"></p>
+           <p> <input type="button" class="btn" id="BTNSERVICE" value="CALCULATE"></p>
 
-           <label id="result" for="html"><H2>RESULT:</H2></label>
+           <label id="AddResult" style="font-size: 40px;font-weight: bolder;"  >RESULT:</label>
+           
+          
             
         </form>
+        <div id="errmsg"></div>
         </div>
     </div>
 </body>
