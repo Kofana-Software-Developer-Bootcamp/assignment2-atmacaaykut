@@ -10,12 +10,12 @@
         CALCULATOR
     </title>
 
-    <!-- in the header section you can add javascript -->
+  
 
-    <!-- include the jQuery library version 3.3.1 -->
+    <!--JQUERY KÜTÜPHANESİ VERSİYON 3.3.1 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- include javascript code -->
+    <!-- JAVASCRIPT KODLARI -->
     <script>
         // the following in order to handle cors in this demo....
         // for details see: https://github.com/Rob--W/cors-anywhere/#documentation
@@ -25,11 +25,11 @@
             }
         });
 
-        // on DOM ready...
+        // DOM
         //Toplama İşlemi
         function addOp() {
             $(function () {
-            // the following event handler will handle click events for BUTTON
+            // İlgili işlem butonu tıklanığında çalışacak metot
             $("#BTNSERVICE").on('click', function (event) {
                 var intA = $('#intA').val();
                 var intB = $('#intB').val();
@@ -72,10 +72,10 @@
             });
         });
         }
-            //Çıkartma İşlemi
+            //Çıkarma İşlemi
             function subsOp() {
             $(function () {
-            // the following event handler will handle click events for BUTTON
+           // İlgili işlem butonu tıklanığında çalışacak metot
             $("#BTNSERVICE1").on('click', function (event) {
                 var intA = $('#intA').val();
                 var intB = $('#intB').val();
@@ -121,7 +121,7 @@
                 //BÖLME İŞLEMİ        
                 function divOp() {
             $(function () {
-            // the following event handler will handle click events for BUTTON
+           // İlgili işlem butonu tıklanığında çalışacak metot
             $("#BTNSERVICE2").on('click', function (event) {
                 var intA = $('#intA').val();
                 var intB = $('#intB').val();
@@ -168,7 +168,7 @@
                     //ÇARPMA İŞLEMİ
                     function mulOp() {
             $(function () {
-            // the following event handler will handle click events for BUTTON
+            // İlgili işlem butonu tıklanığında çalışacak metot
             $("#BTNSERVICE3").on('click', function (event) {
                 var intA = $('#intA').val();
                 var intB = $('#intB').val();
@@ -213,6 +213,10 @@
         }
     </script>
 
+
+<!-- TASARIM KISMI-->
+
+
 </head>
 
 <body>
@@ -255,7 +259,7 @@
                     style="font-size: 40px;font-weight: bolder;background-color: orange;">RESULT:</label>
 
 
-
+                <!--HATA MESAJI-->
             </form>
             <div id="errmsg"></div>
         </div>
