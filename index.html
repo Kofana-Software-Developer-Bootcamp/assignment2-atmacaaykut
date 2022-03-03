@@ -21,7 +21,7 @@
         // for details see: https://github.com/Rob--W/cors-anywhere/#documentation
         jQuery.ajaxPrefilter(function (options) {
             if (options.crossDomain && jQuery.support.cors) {
-                options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+                options.url = ' https://cors-anywhere.herokuapp.com/' + options.url;
             }
         });
 
@@ -44,7 +44,7 @@
                         </soap:Body>
                 </soap:Envelope>`;
 
-                var webserUrl = "http://www.dneonline.com/calculator.asmx?WSDL";
+                var webserUrl = "http://www.dneonline.com/calculator.asmx?wsdl";
                 var self = this;
                 self.disabled = true;
                 $.ajax({
